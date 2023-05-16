@@ -14,7 +14,7 @@ corr = [[46.784485, -71.255592],
 
 scrapeData(corr)
 async function scrapeData(arr) {
-    for (var i = 2; i < arr.length - 1; i++) {
+    for (var i = 6; i < arr.length - 1; i++) {
         longtitude_start = arr[i][1]
         latitude_start = arr[i][0]
         longtitude_end = arr[i + 1][1]
@@ -33,7 +33,7 @@ async function scrapeData(arr) {
         const url_November = "https://www.google.com/maps/dir/" + latitude_start + "," + longtitude_start + "/" + latitude_end + "," + longtitude_end + "/data=!3m1!4b1!4m6!4m5!2m3!6e0!7e2!8j1667260800!3e0"
         const url_Decemeber = "https://www.google.com/maps/dir/" + latitude_start + "," + longtitude_start + "/" + latitude_end + "," + longtitude_end + "/data=!3m1!4b1!4m6!4m5!2m3!6e0!7e2!8j1669852800!3e0"
         urls = [url_Janauary, url_February, url_March, url_April, url_May, url_June, url_July, url_August, url_Sebtember, url_October, url_November, url_Decemeber]
-        for (let index = 7; index < urls.length; index++) {
+        for (let index = 3; index < 7; index++) {
             const browser = await puppeteer.launch({ headless: true });
             const page = await browser.newPage();
             await page.goto(urls[index]);
