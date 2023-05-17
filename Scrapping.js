@@ -3,18 +3,12 @@ const puppeteer = require('puppeteer');
 const fs = require('fs');
 const fetch = require('node-fetch');
 
-corr = [[46.784485, -71.255592],
-        [46.789194, -71.246309],
-        [46.794715, -71.236551],
-        [46.795722, -71.234801], 
-        [46.797066, -71.232549], 
-        [46.802782, -71.222782], 
-        [46.808994, -71.211977], 
+corr = [[46.784485, -71.255592], 
         [46.811999, -71.206312]]
 
 scrapeData(corr)
 async function scrapeData(arr) {
-    for (var i = 6; i < arr.length - 1; i++) {
+    for (var i = 0; i < arr.length - 1; i++) {
         longtitude_start = arr[i][1]
         latitude_start = arr[i][0]
         longtitude_end = arr[i + 1][1]
@@ -33,7 +27,7 @@ async function scrapeData(arr) {
         const url_November = "https://www.google.com/maps/dir/" + latitude_start + "," + longtitude_start + "/" + latitude_end + "," + longtitude_end + "/data=!3m1!4b1!4m6!4m5!2m3!6e0!7e2!8j1667260800!3e0"
         const url_Decemeber = "https://www.google.com/maps/dir/" + latitude_start + "," + longtitude_start + "/" + latitude_end + "," + longtitude_end + "/data=!3m1!4b1!4m6!4m5!2m3!6e0!7e2!8j1669852800!3e0"
         urls = [url_Janauary, url_February, url_March, url_April, url_May, url_June, url_July, url_August, url_Sebtember, url_October, url_November, url_Decemeber]
-        for (let index = 3; index < 7; index++) {
+        for (let index = 3; index < urls.length; index++) {
             const browser = await puppeteer.launch({ headless: true });
             const page = await browser.newPage();
             await page.goto(urls[index]);
@@ -58,7 +52,7 @@ async function scrapeData(arr) {
                         time: currentTime,
                         details: text
                     });
-                    fs.writeFile("ULaval_OldQuebec/" + Months[index] + '_segment'+ (i +1 )+ ".txt", JSON.stringify(data), err => {
+                    fs.writeFile("ULaval_OldQuebec_/" + Months[index] + ".txt", JSON.stringify(data), err => {
                         if (err) throw err;
                         console.log('Data has been saved to data.txt file.');
                     });
